@@ -1,0 +1,5 @@
+.hide { display: none; }
+.clearboth, .clearfloat { clear: both; }
+.floatleft { float: left; }
+.floatright { float: right; }
+.center { text-align: center; }

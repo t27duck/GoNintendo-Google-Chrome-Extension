@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Options for GoNintendo Chrome Extension</title>
+    <link rel="stylesheet" type="text/css" href="css/global.css" />
+    <style type="text/css">
+      form {
+        margin: 0 auto;
+        width: 40em;
+      }
+      label {
+        width: 25em;
+        float: left;
+        text-align: right;
+        margin-right: 0.5em;
+        display: block;
+      }
+
+      .submit input {
+        margin-top: 3px;
+        float: right;
+      }
+      
+      fieldset {
+        margin: 8px 0;
+      }
+
+      legend {
+        border: 1px solid #000;
+        padding: 2px 6px;
+      }
+      
+      .hint {
+        text-align: center;
+        font-style: italic;
+        font-size: 85%;
+        display: block;
+      }
+      
+      .notification {
+        font-weight: bold;
+        background-color: #ffa;
+        border: 1px solid #f50;
+        padding: 3px 5px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        text-align: center;
+      }
+    </style>
+    <script type="text/javascript">
+      var bg = chrome.extension.getBackgroundPage();
+      var settings = bg.settings;
+      
+      function init() {
+        // Set all fields... boring!
+        document.getElementById("close_delay").value = settings.notifications.close_delay;
+        document.getElementById("enable_top_stories").value = settings.top_stories.enable;
+        document.getElementById("top-stories-sound").value = settings.top_stories.sound;;
+        document.getElementById("enable_live_stream").value = settings.live_stream.enable;
+        document.getElementById("live-stream-sound").value = settings.live_stream.sound;
+        document.getElementById("swap_user_and_post").value = settings.message_boards.swap_user_and_post;
+        document.getElementById("refresh_rate").value = settings.refresh_rate;
+        // document.getElementById("hide_topper").value = settings.main_site.hide_topper;
+      }
+      
+      function previewSound(val) {
+        if (val != '') {
+          var a = new Audio();
+          a.src = 'audio/'+val;
+          a.play();
+        }
+      }
+      
+      function saveSettings() {
+        var message = "Say whaaaa?";
+        // Saving all fields... also boring!
+        settings.notifications.close_delay = document.getElementById("close_delay").value;
+        settings.top_stories.enable = document.getElementById("enable_top_stories").value;
+        settings.top_stories.sound = document.getElementById("top-stories-sound").value;
+        settings.live_stream.enable = document.getElementById("enable_live_stream").value;
+        settings.live_stream.sound = document.getElementById("live-stream-sound").value;
+        settings.message_boards.swap_user_and_post = document.getElementById("swap_user_and_post").value;
+        settings.refresh_rate = document.getElementById("refresh_rate").value;
+        // settings.main_site.hide_topper = document.getElementById("hide_topper").value;
+        
+        localStorage['settings'] = JSON.stringify(settings);
+        message = "Settings Saved! :)";
+
+        document.getElementById("notice").innerHTML = message;
+        document.getElementById("notice").style.display = 'block';
+        setTimeout("hideNotice()", 5000);
+      }
+      
+      function hideNotice() {
+        document.getElementById("notice").style.display = "none";
+      }
+    </script>
+  </head>
+  <body onload="init();">
+    <div id="content">
+      <h2 class="center">GoNintendo Chrome Extension Settings</h2>
+      <h4 class="center">Version 1.0.2 by <a href="http://www.t27duck.com" target="_blank">t27duck</a></h4>
+      <form onsubmit="saveSettings(); return false;">
+        <div style="height: 30px;">
+          <div id="notice" class="notification hide">&nbsp;</div>
+        </div>
+        <fieldset id="notifications-fields">
+          <legend>Notifications</legend>
+          <p>
+            <label for="close_delay">Check the site for new info every:</label>
+            <select name="refresh_rate" id="refresh_rate">
+              <option value="10">10 minutes</option>
+              <option value="20">20 minutes</option>
+              <option value="30">30 minutes</option>
+            </select>
+            <div style="text-align: right; font-weight: bold;">The above will not take effect until you restart the browser!</div>
+          </p>
+          <p>
+            <label for="close_delay">Automatically close notification popups after:</label>
+            <select name="close_delay" id="close_delay">
+              <option value="0">Do not auto close</option>
+              <option value="3">3 Seconds</option>
+              <option value="5">5 Seconds</option>
+              <option value="10">10 Seconds</option>
+              <option value="20">20 Seconds</option>
+            </select>
+          </p>
+        </fieldset>
+        
+        <fieldset id="live-stream-fields">
+          <legend>Live Stream</legend>
+          <p>
+            <label for="enable_live_stream">Notify me when the live stream player on the site is enabled:</label>
+            <select name="enable_live_stream" id="enable_live_stream">
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select>
+          </p>
+          <p>
+            <label for="sound">Play this sound:</label>
+            <select id="live-stream-sound" name="sound" class="sound">
+              <option value="none">No Sound</option>
+              <option value="coin.mp3">Mario: Coin</option>
+              <option value="jump.mp3">Mario: Jump</option>
+              <option value="mushroom.mp3">Mario: Mushroom</option>
+              <option value="pipe.mp3">Mario: Pipe</option>
+              <option value="loz_fanfare.mp3">LOZ: Fanfare</option>
+              <option value="loz_key.mp3">LOZ: Key</option>
+              <option value="loz_recorder.mp3">LOZ: Recorder</option>
+              <option value="loz_secret.mp3">LOZ: Secret</option>
+            </select>
+            <a href="#" class="preview-sound" onclick="previewSound(document.getElementById('live-stream-sound').value); return false;">Preview</a>
+          </p>
+        </fieldset>
+        
+        <fieldset id="top-stories-fields">
+          <legend>Top Stories</legend>
+          <p>
+            <label for="enable_top_stories">Notify me when a new top story is posted:</label>
+            <select name="enable_top_stories" id="enable_top_stories">
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select>
+          </p>
+          <p>
+            <label for="sound">Play this sound:</label>
+            <select id="top-stories-sound" name="sound" class="sound">
+              <option value="none">No Sound</option>
+              <option value="coin.mp3">Mario: Coin</option>
+              <option value="jump.mp3">Mario: Jump</option>
+              <option value="mushroom.mp3">Mario: Mushroom</option>
+              <option value="pipe.mp3">Mario: Pipe</option>
+              <option value="loz_fanfare.mp3">LOZ: Fanfare</option>
+              <option value="loz_key.mp3">LOZ: Key</option>
+              <option value="loz_recorder.mp3">LOZ: Recorder</option>
+              <option value="loz_secret.mp3">LOZ: Secret</option>
+            </select>
+            <a href="#" class="preview-sound" onclick="previewSound(document.getElementById('top-stories-sound').value); return false;">Preview</a>
+          </p>
+        </fieldset>
+                
+        <fieldset id="message-board-fields">
+          <legend>Message Boards</legend>
+          <p>
+            <label for="swap_user_and_post">Swap Post and User Information in Threads:</label>
+            <select name="swap_user_and_post" id="swap_user_and_post">
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select>
+          </p>
+          <p>
+            <label>Hide Avatars and/or Signatures on the Forums:</label>
+            <a href="http://gonintendo.com/boards/ucp.php?i=prefs&mode=view" target="_blank">Click Here to Configure</a>
+          </p>
+        </fieldset>
+        
+        <p class="submit"><input type="submit" id="save-settings" value="Save Settings" /></p>
+      </form>
+    </div>
+  </body>
+</html>

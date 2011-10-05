@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+  <meta content="text/html; charset=utf-8" http-equiv="content-type" /> 
+  <meta http-equiv="imagetoolbar" content="no" />
+  <link rel="stylesheet" type="text/css" href="../css/notification.css" />
+  <title>GoNintendo.com</title>
+  <script type="text/javascript">
+    function init() {
+      document.getElementById('content').innerHTML += localStorage['last_announcement'].replace(/\n/gi, "<br />");
+    }
+  </script>
+</head>
+<body onload="init();">
+  <div>
+    <a href="http://www.gonintendo.com/" target="_blank"><img src="../images/icon_48.png" class="icon" /></a>
+    <div class="content" id="content">
+      <strong>Site Announcement:</strong><br />
+    </div>
+    <div class="clearboth"></div>
+  </div>
+</body>
+</html>

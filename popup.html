@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>GoNintendo</title>
+    <link rel="stylesheet" type="text/css" href="css/global.css" />
+    <style type="text/css">
+      body { 
+        width: 600px;
+        font-size: 11px;
+        font-family: 'Lucida Grande', Arial, Helvetica, 'sans-serif normal';
+      }
+      legend {
+        text-transform: uppercase;
+        font-weight: normal;
+        font-size: 10px;
+        letter-spacing: 1px;
+        color: #878787;
+        background-color: #f8f8f8;
+        padding: 2px 5px;
+        border-radius:3px;
+      }
+
+      fieldset {
+        border: 1px solid #f1f1f1;
+        margin: 6px 10px 14px 0;
+        border-radius: 4px;
+      }
+      
+      ul {
+        padding-left: 5px;
+        list-style: none;
+      }
+      
+      li {
+        margin-bottom: 3px;
+      }
+      
+      a:link, a:visited {
+        color: #0075D4;
+        text-decoration: none;
+      }
+      
+      a:hover {
+       color:#EB191D;
+      }
+      
+      .pretty-button {
+        border-color: #FE2C86;
+        padding: 3px 5px;
+        border-style: solid;
+        border-width: 1px;
+        background-color: #eee;
+        font-size: 11px;
+        border-radius: 4px;
+        font-weight: bold;
+      }
+
+      .pretty-button:hover  {
+        color: #FE2C86;
+      }
+
+      .pretty-button:active  {
+        color:white;
+        background-color: #FE2C86;
+        text-decoration: none;
+      }
+    </style>
+    <script type="text/javascript">
+      var bg = chrome.extension.getBackgroundPage();
+      function init() {
+        for(x=0; x<bg.top_stories.length; x++) {
+          top_story = bg.top_stories[x];
+          var li = document.createElement('li');
+          var a = document.createElement('a');
+          a.setAttribute('href',top_story.url);
+          a.setAttribute('target','_blank');
+          t = document.createTextNode(top_story.title);
+          a.appendChild(t);
+          li.appendChild(a);
+          document.getElementById('top-stories').appendChild(li);
+        }
+      }
+    </script>
+  </head>  
+  <body onload="init();">
+    <div id="content">
+      <fieldset>
+        <legend>Recent Top Stories</legend>
+        <ul id="top-stories"></ul>
+        <div align="right"><a href="http://gonintendo.com/?c=2" target="_blank">More...</a></div>
+      </fieldset>
+      <div align="right">
+        <a class="pretty-button" href="http://gonintendo.com/" target="_blank">Main Site</a>
+        <a class="pretty-button" href="http://gonintendo.com/?mode=games" target="_blank">Game Database</a>
+        <a class="pretty-button" href="http://gonintendo.com/boards" target="_blank">Forum</a>
+        <a class="pretty-button" href="http://gonintendo.com/?mode=chat" target="_blank">Chatroom</a>
+      </div>
+      <img src="images/icon_16.png" /> GoNintendo Chrome Extension
+    </div>
+  </body>
+</html>
