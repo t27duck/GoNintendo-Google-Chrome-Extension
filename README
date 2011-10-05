@@ -1,0 +1,27 @@
+The extension automatically hits the site every 20 minutes for new information.
+
+Features:
+- Notification popup when a new top story is posted
+- Notification popup when the live feed player is active on the site
+- Ability to swap the post content and poster information columns on thread pages in the forum
+- Chrome Omnibar integration...
+- - Typing "gn top/rumors/console/portable" takes you to the stories page for that category
+- - "gn forum" and "gn boards" takes you to the message boards
+- - "gn games" takes you to the game database page
+- - "gn chat" takes you to the chat room page
+- - "gn [anything else]" does a story search
+
+To View/Edit Options:
+- Right click on the extension icon at the top right of the browser and click "Options"
+
+Change Log:
+1.0.2 (8/23/2011)
+- Fixed link on options page to take you to the correct page in the UCP on the forums to enable/disable avatars and sigs
+
+1.0.1 (8/23/2011)
+- Bug fixes (and spelling fix)
+- You can adjust the time it takes for the extension to ping the site... 10, 20 (default), or 30 minutes
+- New button image (thanks cortjezter)
+
+1.0.0 (8/23/2011)
+- First Release
