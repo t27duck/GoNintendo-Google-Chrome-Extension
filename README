@@ -15,6 +15,9 @@ To View/Edit Options:
 - Right click on the extension icon at the top right of the browser and click "Options"
 
 Change Log:
+1.0.3 (7/20/2013)
+- Compatible with Google Chrome Extension Manifest version 2
+
 1.0.2 (8/23/2011)
 - Fixed link on options page to take you to the correct page in the UCP on the forums to enable/disable avatars and sigs
 

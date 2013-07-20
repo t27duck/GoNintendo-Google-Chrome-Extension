@@ -4,7 +4,7 @@
     <title>GoNintendo</title>
     <link rel="stylesheet" type="text/css" href="css/global.css" />
     <style type="text/css">
-      body { 
+      body {
         width: 600px;
         font-size: 11px;
         font-family: 'Lucida Grande', Arial, Helvetica, 'sans-serif normal';
@@ -25,25 +25,25 @@
         margin: 6px 10px 14px 0;
         border-radius: 4px;
       }
-      
+
       ul {
         padding-left: 5px;
         list-style: none;
       }
-      
+
       li {
         margin-bottom: 3px;
       }
-      
+
       a:link, a:visited {
         color: #0075D4;
         text-decoration: none;
       }
-      
+
       a:hover {
        color:#EB191D;
       }
-      
+
       .pretty-button {
         border-color: #FE2C86;
         padding: 3px 5px;
@@ -65,24 +65,9 @@
         text-decoration: none;
       }
     </style>
-    <script type="text/javascript">
-      var bg = chrome.extension.getBackgroundPage();
-      function init() {
-        for(x=0; x<bg.top_stories.length; x++) {
-          top_story = bg.top_stories[x];
-          var li = document.createElement('li');
-          var a = document.createElement('a');
-          a.setAttribute('href',top_story.url);
-          a.setAttribute('target','_blank');
-          t = document.createTextNode(top_story.title);
-          a.appendChild(t);
-          li.appendChild(a);
-          document.getElementById('top-stories').appendChild(li);
-        }
-      }
-    </script>
-  </head>  
-  <body onload="init();">
+    <script type="text/javascript" src="js/popup.js"></script>
+  </head>
+  <body>
     <div id="content">
       <fieldset>
         <legend>Recent Top Stories</legend>
